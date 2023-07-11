@@ -65,5 +65,3 @@ class CameraCapture:
             return public_ip
         else:
             return None
-
-CameraCapture()
