@@ -31,4 +31,3 @@ class VerificationWindow():
         self.window.destroy()
 
 
-VerificationWindow()
