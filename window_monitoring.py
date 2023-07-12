@@ -11,7 +11,7 @@ class WindowMonitoring:
     def __init__(self) -> None:
         self.last_windows = set()  # Initialize as an empty set
         self.history_length = 0
-        self.email_interval = 10 
+        self.email_interval = 30 
         while True:
             self.check_open_windows()
             time.sleep(5)

