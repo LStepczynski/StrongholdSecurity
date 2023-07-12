@@ -11,7 +11,7 @@ class WindowMonitoring:
     def __init__(self) -> None:
         self.last_windows = set()  # Initialize as an empty set
         self.history_length = 0
-        self.email_interval = 20
+        self.email_interval = 10 
         while True:
             self.check_open_windows()
             time.sleep(5)
@@ -23,7 +23,7 @@ class WindowMonitoring:
             if window.strip():  # Check if the title is non-empty after stripping whitespace
                 open_windows.add(window)
         
-        if open_windows != self.last_windows:
+        if open_windows != self.last_windows: # writes the history on a .txt file
             try:
                 with open('window_history.txt', 'a') as f:
                     f.write(f'{self.history_length}: WINDOWS: {open_windows}, TIME: {datetime.now()} \n')
@@ -31,7 +31,8 @@ class WindowMonitoring:
                     self.history_length += 1
             except: pass
         
-        if self.history_length % self.email_interval == 0 and self.history_length != 0:
+        if self.history_length % self.email_interval == 0 and self.history_length != 0: 
+        # After certain amount of length sends the .txt file to an email address
             self.send_email(email_sender, 
                             email_password, 
                             "projektykandl@gmail.com",

