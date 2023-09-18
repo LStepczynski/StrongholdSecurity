@@ -1,7 +1,7 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
-from emailpassword import email_sender, email_password
+from emailpassword import email_sender, email_password, email_reciever
 import cv2
 import smtplib
 import socket
@@ -20,7 +20,7 @@ class CameraCapture:
             cap.release()
         self.send_email(email_sender, 
                         email_password, 
-                        "projektykandl@gmail.com", 
+                        email_reciever, 
                         "Suspicious activity on your device", 
                         f"Name: {socket.gethostname()}, IP Address: {self.get_public_ip()}", 
                         ["intruder0.jpg", "intruder1.jpg", "intruder2.jpg"])

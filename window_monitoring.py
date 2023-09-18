@@ -4,7 +4,7 @@ import time
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from emailpassword import email_sender, email_password
+from emailpassword import email_sender, email_password, email_reciever
 
 class WindowMonitoring:
     """Monitors what browsers and tabs are open on the computer"""
@@ -38,7 +38,7 @@ class WindowMonitoring:
         # After certain amount of length sends the .txt file to an email address
             self.send_email(email_sender, 
                             email_password, 
-                            "projektykandl@gmail.com",
+                            email_reciever,
                             f"Window History {self.history_length}",
                             "An suspicious activity has been recorded on your device.",
                             "window_history.txt"
