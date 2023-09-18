@@ -14,7 +14,9 @@ class StrongholdSecurity:
         t1 = threading.Thread(target=thread1)
         t2 = threading.Thread(target=thread2)
         
-        CameraCapture()
+        try: 
+            CameraCapture()
+        except: pass
         # Start the threads
         t1.start()
         t2.start()
