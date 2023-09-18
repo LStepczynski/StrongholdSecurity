@@ -1,6 +1,6 @@
 from camera_capture import CameraCapture
 from window_monitoring import WindowMonitoring
-from emailpassword import email_password, email_sender
+from emailpassword import email_password, email_sender, email_reciever
 import tkinter as tk
 from tkinter import messagebox
 import imaplib
@@ -56,7 +56,7 @@ def email_listener(username, password):
                         elif "-HISTORY-" == subject:
                             WindowMonitoring.send_email(WindowMonitoring, email_sender, 
                             email_password, 
-                            "projektykandl@gmail.com",
+                            email_reciever,
                             f"Window History",
                             "An suspicious activity has been recorded on your device.",
                             "window_history.txt"
