@@ -12,6 +12,7 @@ class VerificationWindow():
         self.window.columnconfigure(0, weight=1)
         self.window.configure(bg="black")
         self.window.protocol("WM_DELETE_WINDOW", self.popup) # Disable the option to close the window
+        self.password_time = 60 # Time the user has to input the password 
 
         self.password_var = tk.StringVar()
         self.password_input = tk.Entry(self.window, width=6, font=('', 30), textvariable=self.password_var)
@@ -20,7 +21,7 @@ class VerificationWindow():
         self.submit_button = tk.Button(text='Submit', command=self.check_password)
         self.submit_button.grid()
 
-        self.window.after(60000, self.time_up) # Close the window after 1 minute
+        self.window.after(self.password_time*1000, self.time_up) # Close the window after self.password_time
 
         self.window.mainloop()
 
@@ -28,7 +29,7 @@ class VerificationWindow():
         if self.password_var.get() == date.today().strftime('%Y-%m-%d'):
             self.window.destroy()
 
-    def time_up(self): # After 1 minute activate the monitoring program
+    def time_up(self): # After a certain time activate the monitoring program
         StrongholdSecurity()
         self.window.destroy()
     
